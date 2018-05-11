@@ -25,9 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool, default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [host.stip() for host in config('ALLOWED_HOSTS').split(',')]
 
 
 # Application definition
@@ -78,16 +78,11 @@ WSGI_APPLICATION = 'porganize.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-#DATABASES = {
- #   'default': {
-  #      'ENGINE': 'django.db.backends.sqlite3',
-   #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #}
-#}
-
-DATABASES['default'] = django.db.backends.sqlite3(conn_max_age=600)
-DATABASES['default'] = django.db.backends.sqlite3(default='sqlite:///PATH')
-DATABASES['default'] = dj_database_url.parse('sqlite:///PATH', conn_max_age=600)
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config("DATABASE_URL")
+        )
+}
 
 
 # Password validation
@@ -126,4 +121,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
