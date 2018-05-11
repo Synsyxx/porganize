@@ -1,0 +1,26 @@
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Porganize{% endblock %}</title>
+        {# Load Bootstrap CSS and JS #}
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+    </head>
+    <body>
+        <div id="menu">
+            {% block menu %}
+            <ul>
+                <li><a href="/">Home</a></li>
+                    <li><a href="/bookmarks">Bookmarks</a></li>
+            </ul>
+            {% endblock%}
+        </div>
+        <div id="content">
+            {% block content %}
+            <h1>Welcome to Porganize!</h1>
+            {% endblock %}
+        </div>
+    </body>
+</html>

@@ -1,3 +1,6 @@
+{% extends "porganize_base.html" %}
+
+{% block content %}
 <h1>Bookmarks</h1>
 
 {% if bookmarks %}
@@ -22,9 +25,5 @@
 <p>No personal bookmarks available, add some!</p>
 {% endif %}
 
-<h2>New Bookmark</h2>
-<form method="POST" class="bookmark-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="save btn btn-default">Save</button>
-</form>
+{% include "bookmarks/form.html" %}
+{% endblock %}
