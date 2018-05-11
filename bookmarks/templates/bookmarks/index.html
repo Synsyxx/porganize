@@ -1,6 +1,7 @@
 <h1>Bookmarks</h1>
 
 {% if bookmarks %}
+<h2>Public</h2>
 <ol>
     {% for bookmark in bookmarks %}
     <li><a href="{{ bookmark.url }}">{{ bookmark.name }}</a></li>
@@ -8,4 +9,15 @@
 </ol>
 {% else %}
 <p>No bookmarks available, add some!</p>
+{% endif %}
+
+{% if personal_bookmarks %}
+<h2>Personal</h2>
+<ol>
+    {% for bookmark in personal_bookmarks %}
+    <li><a href="{{ bookmark.url }}">{{ bookmark.name }}</a></li>
+    {% endfor %}
+</ol>
+{% else %}
+<p>No personal bookmarks available, add some!</p>
 {% endif %}
