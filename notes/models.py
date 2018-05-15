@@ -10,3 +10,4 @@ class Note(models.Model):
     content = models.TextField(blank=True, default='Write stuff here...')
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True)
+    # api_enabled = models.BooleanField(default=True)
